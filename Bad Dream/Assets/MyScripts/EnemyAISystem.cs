@@ -36,7 +36,6 @@ public class EnemyAISystem : MonoBehaviour
         if(isPlayerInSightRange && !isPlayerInAttackRange) ChasePlayer();
         if(isPlayerInSightRange && isPlayerInAttackRange) AttackPlayer();
 
-    OnDrawGizmosSelected();
 
 
     }
