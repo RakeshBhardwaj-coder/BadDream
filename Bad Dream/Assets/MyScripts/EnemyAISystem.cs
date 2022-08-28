@@ -8,6 +8,7 @@ public class EnemyAISystem : MonoBehaviour
    public UnityEngine.AI.NavMeshAgent navMeshAgent;
    public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
+    public Animator enemyAnimator;
 
     //Patrolling
     public Vector3 walkPoint;
@@ -26,6 +27,9 @@ public class EnemyAISystem : MonoBehaviour
         player = GameObject.Find("FPSController").transform;
         navMeshAgent = GetComponent<NavMeshAgent>();
 
+    }
+    void Start(){
+        enemyAnimator.SetBool("isAttack",false);
     }
     void Update(){
         //check for sight and attack range
@@ -53,8 +57,7 @@ private void AttackPlayer(){
         if(!alreadyAttacked){
 
             ///Attack code here
-
-
+enemyAnimator.SetBool("isAttack",true);
             ///
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack),timeBetweenAttacks);
@@ -63,6 +66,8 @@ private void AttackPlayer(){
     }
     private void ResetAttack(){
         alreadyAttacked = false;
+        enemyAnimator.SetBool("isAttack", false);
+
     }
     private void Patrolling(){
         if(!walkPointSet) SearchWalkPoint();
